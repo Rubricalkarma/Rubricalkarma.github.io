@@ -1,0 +1,74 @@
+
+body{
+	background-color: #395e9a;
+}
+input{
+	background-color: lightblue;
+	border: none;
+	color: black;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	font-family: 'Roboto';
+	text-transform: uppercase;
+}
+
+select{
+	background-color: lightblue;
+	border: none;
+	color: black;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	font-family: 'Roboto';
+	text-transform: uppercase;
+}
+
+button {
+	background-color: lightblue;
+	border: none;
+	color: black;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	font-family: 'Roboto';
+	text-transform: uppercase;
+}
+button:hover{
+	background-color: lightblue;
+	transition: background .25s;
+}
+.info{
+	text-align: center;
+	width: 100%;
+}
+
+
+.header h1, p{
+	font-family: 'Roboto';
+	text-transform: uppercase;
+	color: white;
+	padding: 0;
+}
+.header{
+
+	padding-left: -10px;
+	height: 130px;
+	text-align: center;
+	background-color: #24477F;
+
+}
+.characterIcon img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#versionInfo {
+	font-size: 11px;
+}

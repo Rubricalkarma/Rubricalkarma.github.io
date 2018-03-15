@@ -169,7 +169,6 @@ function getRace(number){
 
 function addRaids(){
 
-
 	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
 		var x = document.getElementById("raidSelect");
 		var c = document.createElement("option");

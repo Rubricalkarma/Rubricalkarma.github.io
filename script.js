@@ -1,9 +1,4 @@
 
-
-var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8"
-var raidInfoObject;
-
-
 function getProgressionInfo(){
 	var server = document.getElementById("serverSearch").value;
 	var character = document.getElementById("characterSearch").value;
@@ -110,19 +105,6 @@ function getClassColor(number){
 	}
 }
 
-function getRaids(){
-
-	$.ajax({
-		url: apiProgression,
-		async: false,
-		dataType: 'json',
-		success: function (json) {
-			raidInfoObject = json;
-		}
-	});
-
-}
-
 
 function getClass(number){
 
@@ -169,17 +151,46 @@ function getRace(number){
 
 function addRaids(){
 
+<<<<<<< HEAD
 	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
+=======
+	var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
+
+
+	var raidsJSON = null;
+
+	$.ajax({
+		url: apiProgression,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			raidsJSON = json;
+		}
+	});
+
+	for(var i=0;i<raidsJSON.progression.raids.length;i++){
+>>>>>>> parent of 0637556... V1.0.1
 		var x = document.getElementById("raidSelect");
 		var c = document.createElement("option");
-		c.text = raidInfoObject.progression.raids[i].name;
+		c.text = raidsJSON.progression.raids[i].name;
 		x.options.add(c, i);
 	}
 }
 
 function getBosses(){
 
-	
+	var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
+
+	var bossesJSON = null;
+
+	$.ajax({
+		url: apiProgression,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			bossesJSON = json;
+		}
+	});
 
 	$("#bossSelect").empty();
 
@@ -187,17 +198,17 @@ function getBosses(){
 
 	var raidIndex;
 
-	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
-		if(raidInfoObject.progression.raids[i].name===selected){
+	for(var i=0;i<bossesJSON.progression.raids.length;i++){
+		if(bossesJSON.progression.raids[i].name===selected){
 			raidIndex=i;
 			break;
 		}
 	}
 
-	for(var j=0;j<raidInfoObject.progression.raids[raidIndex].bosses.length;j++){
+	for(var j=0;j<bossesJSON.progression.raids[raidIndex].bosses.length;j++){
 		var x = document.getElementById("bossSelect");
 		var c = document.createElement("option");
-		c.text = raidInfoObject.progression.raids[raidIndex].bosses[j].name;
+		c.text = bossesJSON.progression.raids[raidIndex].bosses[j].name;
 		x.options.add(c, i);
 	}
 

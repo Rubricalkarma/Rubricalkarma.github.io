@@ -179,7 +179,6 @@ function addRaids(){
 
 function getBosses(){
 
-	
 
 	$("#bossSelect").empty();
 

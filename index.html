@@ -9,14 +9,20 @@
 </head>
 <body>
 	<div class="header">
-		<h1>The Bread Men Offical Armory </h1>
-		<input id="serverSearch" type="text" placeholder="Server">
-		<input id="characterSearch" type="text" placeholder="Character">
-		<select id="raidSelect" onchange="getBosses()">
-		</select>
-		<select id="bossSelect">
-		</select>
-		<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
+		<div class="headerTitle">
+			<h1>The Bread Men Offical Armory </h1>
+			<h2>Amature Normal Raiding Guild</h2>
+			<h4>US-Skywall</h4>
+		</div>
+		<div class="inputBoxes">
+			<input id="serverSearch" type="text" placeholder="Server">
+			<input id="characterSearch" type="text" placeholder="Character">
+			<select id="raidSelect" onchange="getBosses()">
+			</select>
+			<select id="bossSelect">
+			</select>
+			<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
+		</div>
 
 	</div>
 
@@ -31,13 +37,14 @@
 		<p id="itemLevel"></p>
 
 		<p id="kills"></p>
+		<p id="raidKills"></p>
 	</div>
 
 	<div class="characterIcon">
 		<img id="icon" src="https://vignette.wikia.nocookie.net/uncyclopedia/images/0/01/DramaticQuestionMark.png/revision/latest?cb=20060419021703"/>
 	</div>
 
-	<p id="versionInfo"> [Version 1.0.1] - (3/14/2018) - Syrus Bomberger </p>
+	<p id="versionInfo"> [Version 1.0.2] - (3/14/2018) - Syrus Bomberger </p>
 
 	<script type="text/javascript">
 		getRaids();

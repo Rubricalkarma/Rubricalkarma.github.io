@@ -2,8 +2,62 @@
 <html>
 <head>
 	<title>Armory</title>
+	<link href="./armoryStyle.css" type="text/css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="./armoryScript.js"></script>
 </head>
 <body>
-<h1> whats up</h1>
+	<div class="navBar">
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="armory.html">Armory</a></li>
+			<li><a href="">BMI</a></li>
+			<li><a href="">Join</a></li>
+			<h2>US-Skywall</h2>
+			<h1> The Bread Men </h1>
+
+		</ul>
+
+	</div>
+	<div class="searchBar">
+		<div class="inputBoxes">
+			<input id="serverSearch" type="text" placeholder="Server">
+			<input id="characterSearch" type="text" placeholder="Character">
+			<select id="raidSelect" onchange="getBosses()">
+			</select>
+			<select id="bossSelect">
+			</select>
+			<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
+		</div>
+	</div>
+
+	<div class="info">
+		<p>Character</p>
+		<p id="name"></p>
+
+		<p>Character Info</p>
+		<p id="characterInfo"></p>
+
+		<p>Character Item Level</p>
+		<p id="itemLevel"></p>
+
+		<p id="kills"></p>
+		<p id="raidKills"></p>
+	</div>
+
+	<div class="characterIcon">
+		<img id="icon" src="https://vignette.wikia.nocookie.net/uncyclopedia/images/0/01/DramaticQuestionMark.png/revision/latest?cb=20060419021703"/>
+	</div>
+
+	<p id="versionInfo"> [Version 1.0.2] - (3/14/2018) - Syrus Bomberger </p>
+
+	<script type="text/javascript">
+		getRaids();
+		addRaids();
+		getBosses();
+
+	</script>
+
 </body>
 </html>

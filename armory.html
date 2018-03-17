@@ -8,18 +8,8 @@
 	<script src="./armoryScript.js"></script>
 </head>
 <body>
-	<div class="navBar">
-		<ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a id="active" href="armory.html">Armory</a></li>
-			<li><a href="">BMI</a></li>
-			<li><a href="">Join</a></li>
-			<h2>US-Skywall</h2>
-			<h1> The Bread Men </h1>
+	<div class="navBarHolder"></div>
 
-		</ul>
-
-	</div>
 	<div class="searchBar">
 		<div class="inputBoxes">
 			<input id="serverSearch" type="text" placeholder="Server">
@@ -56,6 +46,10 @@
 		getRaids();
 		addRaids();
 		getBosses();
+
+		$(function(){
+			$("#navBarHolder").load("navBar.html");
+		});
 
 	</script>
 

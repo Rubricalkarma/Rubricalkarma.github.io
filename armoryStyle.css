@@ -73,39 +73,6 @@ button:active{
 	padding:0;
 	margin-bottom: 20px;
 }
-.navBar ul{
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-
-}
-.navBar li{
-	float: left;
-}
-.navBar h1,h2{
-	font-size: 25px;
-	display: block;
-	float: right;
-	margin: 0;
-	padding: 15px 10px;
-	line-height: 20px;
-}
-.navBar a{
-	color: white;
-	text-decoration: none;
-	display: block;
-	padding: 15px 20px;
-	border-radius: 4px;
-
-}
-.navBar a:hover{
-	background: silver;
-	color:black;
-}
-.navBar #active{
-	background-color: lavender;
-	color:black;
-}
 
 .characterIcon img{
 	display: block;

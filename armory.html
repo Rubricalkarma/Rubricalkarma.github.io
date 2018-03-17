@@ -10,6 +10,13 @@
 <body>
 	<div class="navBarHolder"></div>
 
+	<script>
+		
+		$(function(){
+			$("#navBarHolder").load("navBar.html");
+		});
+	</script>
+
 	<div class="searchBar">
 		<div class="inputBoxes">
 			<input id="serverSearch" type="text" placeholder="Server">
@@ -44,9 +51,6 @@
 
 	<script>
 
-		$(function(){
-			$("#navBarHolder").load("navBar.html");
-		});
 
 		getRaids();
 		addRaids();

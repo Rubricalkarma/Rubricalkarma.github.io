@@ -69,13 +69,17 @@ button:active{
 .navBar{
 	background-color: darkblue;
 	height: 50px;
-	border: 3px solid white;
 	border-radius: 10px;
 	padding:0;
 	margin-bottom: 20px;
 }
-.navBar li{
+.navBar ul{
 	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+}
+.navBar li{
 	float: left;
 }
 .navBar h1,h2{
@@ -83,15 +87,26 @@ button:active{
 	display: block;
 	float: right;
 	margin: 0;
-	padding: 0px 10px;
+	padding: 15px 10px;
 	line-height: 20px;
 }
 .navBar a{
 	color: white;
 	text-decoration: none;
 	display: block;
-	padding: 0px 20px;
+	padding: 15px 20px;
+	border-radius: 4px;
+
 }
+.navBar a:hover{
+	background: silver;
+	color:black;
+}
+.navBar #active{
+	background-color: lavender;
+	color:black;
+}
+
 .characterIcon img{
 	display: block;
 	margin-left: auto;

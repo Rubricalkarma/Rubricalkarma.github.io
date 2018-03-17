@@ -8,32 +8,16 @@
 	<script src="./script.js"></script>
 </head>
 <body>
-	<div class="navBar">
-		<ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a href="armory.html">Armory</a></li>
-			<li><a href="">BMI</a></li>
-			<li><a href="">Join</a></li>
-			<h2>US-Skywall</h2>
-			<h1> The Bread Men </h1>
 
-		</ul>
-
-	</div>
-	
+	<div id="navBarHolder"></div>
 
 	<p id="versionInfo"> [Version 1.0.2] - (3/14/2018) - Syrus Bomberger </p>
 
-	<script type="text/javascript">
-		getRaids();
-		addRaids();
-		getBosses();
-
+	<script>
+		$(function(){
+			$("#navBarHolder").load("navBar.html");
+		});
 	</script>
-
-
-
-
 
 </body>
 </html>

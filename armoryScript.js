@@ -18,7 +18,6 @@ function getRealms(){
 	});
 
 	for(let i=0;i<realmInfoObject.realms.length;i++){
-		console.log(realmInfoObject.realms[i].name);
 		realmList.push(realmInfoObject.realms[i].name);
 	}
 	
@@ -138,18 +137,7 @@ function getClassColor(number){
 	}
 }
 
-function getRaids(){
 
-	$.ajax({
-		url: apiProgression,
-		async: false,
-		dataType: 'json',
-		success: function (json) {
-			raidInfoObject = json;
-		}
-	});
-
-}
 
 
 function getClass(number){
@@ -193,6 +181,29 @@ function getRace(number){
 			return raceObject.races[i].name;	
 		}
 	}
+}
+
+function getRaids(){
+ 	//Reads raidInfo from localstorage
+ 	raidInfoObject = JSON.parse(localStorage.getItem('raidInfoObject'));
+	//Checks if the info is empty
+	//If so, makes api call to recieve information
+	if(raidInfoObject===null){
+		$.ajax({
+			url: apiProgression,
+			async: false,
+			dataType: 'json',
+			success: function (json) {
+				raidInfoObject = json;
+				console.log("Raid Boss Info Recieved")
+				localStorage.setItem('raidInfoObject', JSON.stringify(raidInfoObject));
+			}
+		});
+	}else{
+	//If the info is not null, then continues properly
+	console.log("Raid Boss Info Read From Cache");
+}
+
 }
 
 function addRaids(){

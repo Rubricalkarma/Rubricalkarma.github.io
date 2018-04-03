@@ -1,7 +1,35 @@
 
 
-var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8"
+var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
 var raidInfoObject;
+var realmList=[];
+
+function getRealms(){
+	var realmInfoObject;
+	var apiRealm = "https://us.api.battle.net/wow/realm/status?locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
+
+	$.ajax({
+		url: apiRealm,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			realmInfoObject = json;
+		}
+	});
+
+	for(let i=0;i<realmInfoObject.realms.length;i++){
+		console.log(realmInfoObject.realms[i].name);
+		realmList.push(realmInfoObject.realms[i].name);
+	}
+	
+	$( function() {
+
+		$( "#serverSearch" ).autocomplete({
+			source: realmList,
+		});
+	} );
+
+}
 
 
 function getProgressionInfo(){

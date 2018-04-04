@@ -12,6 +12,7 @@ var realmList=[];
 var recentCharacters=[];
 recentCharacters=JSON.parse(localStorage.getItem('recentCharacters'));
 recentCharacters.push("hellotest");
+console.log(recentCharacters);
 
 function getRealms(){
 

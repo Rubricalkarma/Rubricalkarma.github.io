@@ -13,6 +13,7 @@ var recentCharacters=[];
 recentCharacters=JSON.parse(localStorage.getItem('recentCharacters'));
 recentCharacters.push("hellotest");
 console.log(recentCharacters);
+console.log("up to date");
 
 function getRealms(){
 

@@ -9,11 +9,18 @@ var apiRealm = "https://us.api.battle.net/wow/realm/status?locale=en_US&apikey=d
 var raidInfoObject;
 var realmList=[];
 
-var recentCharacters=[];
-recentCharacters=JSON.parse(localStorage.getItem('recentCharacters'));
-recentCharacters.push("hellotest");
+
+var recentCharacters=JSON.parse(localStorage.getItem('recentCharacters'));
+if(recentCharacters===null){
+	recentCharacters=[];
+}
+//recentCharacters.push("hellotest");
 console.log(recentCharacters);
 console.log("up to date");
+
+function removeRecentCharacters(){
+	localStorage.clear();
+}
 
 function getRealms(){
 

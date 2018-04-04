@@ -19,7 +19,9 @@ console.log(recentCharacters);
 console.log("up to date");
 
 function removeRecentCharacters(){
-	localStorage.clear();
+	localStorage.removeItem('recentCharacters');
+	recentCharacters=[];
+	getRealms();
 }
 
 function getRealms(){

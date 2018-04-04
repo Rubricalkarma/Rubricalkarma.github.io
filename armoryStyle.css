@@ -10,25 +10,35 @@ body{
 	border: 1px solid darkblue;
 	color: black;
 	list-style: none;
+	margin: auto;
+	padding-left: 10px;
+	padding-top: 3px;
+
 
 	max-height: 200px; 
 	overflow-y: auto; 
 	overflow-x: hidden;
-
 }
+.ui-state-active{
+	padding-left: 0px;
+	margin: 0;
+	position: relative;
+	background: white;
+}
+
 .ui-helper-hidden-accessible {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
 }
 .searchBar{
 	height:75px;
-	border-radius: 20px;
+	//border-radius: 20px;
 	padding: 5px 0px;
 	background-color: lightblue;
 

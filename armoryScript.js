@@ -49,30 +49,24 @@ function getRealms(){
 		realmList.push(realmInfoObject.realms[i].name);
 	}
 
-	$( function() {
 		//sets autocomplete for serverSearch with realmList array
 		$( "#serverSearch" ).autocomplete({
 			minLength: 0,
 			source: realmList,
 			position: {my: "left+0 top+0",},
 		})
-
 		.focus(function() {
 			$(this).autocomplete('search', $(this).val())
 		});
-	});
 
-	$( function() {
 		//sets autocomplete for serverSearch with realmList array
 		$( "#characterSearch" ).autocomplete({
 			minLength: 0,
 			source: recentCharacters,
 		})
-
 		.focus(function() {
 			$(this).autocomplete('search', $(this).val())
 		});
-	});
 
 
 }
@@ -84,7 +78,9 @@ function getProgressionInfo(){
 	var character = document.getElementById("characterSearch").value;
 	var apiProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
 	var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
-	recentCharacters.push(character);
+	if(!recentCharacters.includes(character)){
+		recentCharacters.push(character);
+	}
 	localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
 	var itemInfoObject;
 

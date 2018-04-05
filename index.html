@@ -10,10 +10,11 @@
 </head>
 <body>
 	<script type="text/javascript">
-		console.log(window.innerWidth);
-		if (window.innerWidth < 960) {
-			window.location = "mobileHome.html";
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			window.location="mobileHome.html";
 		}
+
+
 	</script>
 
 

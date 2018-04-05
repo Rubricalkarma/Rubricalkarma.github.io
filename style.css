@@ -2,28 +2,10 @@
 body{
 	padding: 0;
 	margin: 0;
-	font-family: 'Lato', comic sans ms;
+	font-family: 'Roboto', comic sans ms;
 	font-weight: bold;
 	background-image: url("background.png");
 	background-size: cover;
-	color:white;
-}
-.info{
-	text-align: center;
-	width: 100%;
-}
-
-#versionInfo {
-	font-size: 11px;
-}
-.searchBar{
-	height:75px;
-	border-radius: 20px;
-	padding: 5px 0px;
-	background-color: lightblue;
-
-}
-.inputBoxes{
-	text-align: center;
-	padding: 10px;
+	color: white;
+	text-transform: uppercase;
 }

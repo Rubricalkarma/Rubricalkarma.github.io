@@ -11,8 +11,8 @@
 	<script src="./armoryScript.js"></script>
 </head>
 <body>
-	<div id="navBarHolder"></div>
 
+	<div id="navBarHolder"></div>
 	<script>
 		$(function(){
 			$("#navBarHolder").load("navBar.html");
@@ -23,15 +23,16 @@
 		<div class="inputBoxes">
 			<input id="serverSearch" type="text" placeholder="Server" spellcheck="false">
 			<input id="characterSearch" type="text" placeholder="Character" spellcheck="false">
-			<select id="raidSelect" onchange="getBosses()">
-			</select>
-			<select id="bossSelect">
-			</select>
+			<button id="removeRecentCharacters" onclick="removeRecentCharacters();"> remove recent searches </button>
 			<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
 		</div>
 	</div>
+	
+	<div id="raid">
+		<select id="raidSelect" onchange="getBosses()"></select>
+		<select id="bossSelect"></select>
+	</div>
 
-	<button id="removeRecentCharacters" onclick="removeRecentCharacters();"> remove recent searches </button>
 
 	<div class="info">
 		<p>Character</p>

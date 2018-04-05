@@ -68,97 +68,110 @@ function getRealms(){
 		});
 
 
-}
-
-
-
-function getProgressionInfo(){
-	var server = document.getElementById("serverSearch").value;
-	var character = document.getElementById("characterSearch").value;
-	var apiProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
-	var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
-	if(!recentCharacters.includes(character)){
-		recentCharacters.push(character);
 	}
-	localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
-	var itemInfoObject;
 
-	$.ajax({
-		url: apiItems,
-		async: false,
-		dataType: 'json',
-		success: function (json) {
-			itemInfoObject = json;
+
+
+	function getProgressionInfo(){
+
+		var server = document.getElementById("serverSearch").value;
+		var character = document.getElementById("characterSearch").value;
+		var apiCharProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+		var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+		if(!recentCharacters.includes(character)){
+			recentCharacters.push(character);
 		}
-	});
+		localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
+		var itemInfoObject;
 
-	var color = "gray";
-	var itemLevel = itemInfoObject.items.averageItemLevel;
+		$.ajax({
+			url: apiItems,
+			async: false,
+			dataType: 'json',
+			success: function (json) {
+				itemInfoObject = json;
+			}
+		});
 
-	if(itemLevel>960){
-		color="orange";
-	}
-	else if(itemLevel>940){
-		color="purple";
-	}
-	else if(itemLevel>920){
-		color="blue";
-	}
-	else if(itemLevel>900){
-		color="green";
-	}
-	else if(itemLevel>880){
-		color="white";
-	}
-	var profileImage = itemInfoObject.thumbnail.replace("avatar.jpg", "profilemain.jpg");
+		var color = "gray";
+		var itemLevel = itemInfoObject.items.averageItemLevel;
 
-	document.getElementById("itemLevel").style = "color: "+color;
-	document.getElementById("itemLevel").innerHTML = itemLevel;
-	document.getElementById("icon").src = "http://render-us.worldofwarcraft.com/character/"+profileImage;
-
-	$.ajax({
-		url: apiProgression,
-		async: false,
-		dataType: 'json',
-		success: function (json) {
-			progressionInfoObject = json;
+		if(itemLevel>960){
+			color="orange";
 		}
-	});
+		else if(itemLevel>940){
+			color="purple";
+		}
+		else if(itemLevel>920){
+			color="blue";
+		}
+		else if(itemLevel>900){
+			color="green";
+		}
+		else if(itemLevel>880){
+			color="white";
+		}
+		var profileImage = itemInfoObject.thumbnail.replace("avatar.jpg", "profilemain.jpg");
 
+		document.getElementById("itemLevel").style = "color: "+color;
+		document.getElementById("itemLevel").innerHTML = itemLevel;
+		document.getElementById("icon").src = "http://render-us.worldofwarcraft.com/character/"+profileImage;
 
-	var raidIndex = 0;
-	var bossIndex=0;
-	var raidName = document.getElementById("raidSelect").value;
-	var bossName = document.getElementById("bossSelect").value;
+		$.ajax({
+			url: apiCharProgression,
+			async: false,
+			dataType: 'json',
+			success: function (json) {
+				characterProgressionInfoObject = json;
+			}
+		});
 
+		console.log("helloss");
+		var raidIndex = 0;
+		var bossIndex=0;
+		var raidName = document.getElementById("raidSelect").value;
+		var bossName = document.getElementById("bossSelect").value;
 
-	for(var j=0;j<progressionInfoObject.progression.raids.length;j++){
-		if(progressionInfoObject.progression.raids[j].name === raidName){
+	/*
+	for(var j=0;j<characterProgressionInfoObject.progression.raids.length;j++){
+		if(characterProgressionInfoObject.progression.raids[j].name === raidName){
 			raidIndex=j;
 			break;
 		}
 	}
 
-	for(var k=0;k<progressionInfoObject.progression.raids[raidIndex].bosses.length;k++){
-		if(progressionInfoObject.progression.raids[raidIndex].bosses[k].name===bossName){
+	for(var k=0;k<characterProgressionInfoObject.progression.raids[raidIndex].bosses.length;k++){
+		if(characterProgressionInfoObject.progression.raids[raidIndex].bosses[k].name===bossName){
 			bossIndex=k;
 			break;
 		}
 	}
-
-	document.getElementById("name").style.color=getClassColor(progressionInfoObject.class);
-	document.getElementById("name").innerHTML = progressionInfoObject.name+" - "+progressionInfoObject.realm;
-	document.getElementById("characterInfo").style.color=getClassColor(progressionInfoObject.class);
-	document.getElementById("characterInfo").innerHTML = "level "+progressionInfoObject.level+" "+getRace(progressionInfoObject.race)+" "+getClass(progressionInfoObject.class);
-	document.getElementById("kills").innerHTML = 
-	"<div>"+progressionInfoObject.progression.raids[raidIndex].name+" - "+progressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].name+"</div><br/>"+
-	"<div style='color: green'>LFR: "+progressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].lfrKills+"</div><br/>"+
-	"<div style='color: orange'>Normal: "+progressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].normalKills+"</div><br/>"+
-	"<div style='color: yellow'>Heroic: "+progressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].heroicKills+"</div><br/>"+
-	"<div style='color: red'>Mythic: "+progressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].mythicKills+"</div><br/>"
+	*/
 
 
+	document.getElementById("name").style.color=getClassColor(characterProgressionInfoObject.class);
+	document.getElementById("name").innerHTML = characterProgressionInfoObject.name+" - "+characterProgressionInfoObject.realm;
+	document.getElementById("characterInfo").style.color=getClassColor(characterProgressionInfoObject.class);
+	document.getElementById("characterInfo").innerHTML = "level "+characterProgressionInfoObject.level+" "+getRace(characterProgressionInfoObject.race)+" "+getClass(characterProgressionInfoObject.class);
 
+	var killFeed="";
+	for(var i = 0;i<characterProgressionInfoObject.progression.raids.length;i++){
+		console.log("Raid: "+ characterProgressionInfoObject.progression.raids[i].name);
+		raidIndex=i;
+		for(var j = 0;j<characterProgressionInfoObject.progression.raids[raidIndex].bosses.length;j++){
+			console.log("      "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[j].name);
+			bossIndex=j;
+
+			killFeed = killFeed.concat("<div>"+characterProgressionInfoObject.progression.raids[raidIndex].name+" - "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].name+"</div><br/>"+
+				"<div style='color: green'>LFR: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].lfrKills+"</div><br/>"+
+				"<div style='color: orange'>Normal: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].normalKills+"</div><br/>"+
+				"<div style='color: yellow'>Heroic: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].heroicKills+"</div><br/>"+
+				"<div style='color: red'>Mythic: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].mythicKills+"</div><br/>");
+		}	
+
+	}
+	console.log(killFeed);
+	document.getElementById("kills").innerHTML = killFeed;
 }	
 
 function getClassColor(number){
@@ -194,8 +207,6 @@ function getClassColor(number){
 
 
 function getClass(number){
-
-
 
 	var classObject = null;
 

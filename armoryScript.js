@@ -1,9 +1,4 @@
 
-window.onload=function(){
- document.body.className='show';
-}
-
-
 var apiKey="dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
 var apiProgression = "https://us.api.battle.net/wow/character/zuljin/magepie?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
 var apiRaceInfo = "https://us.api.battle.net/wow/data/character/races?locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";

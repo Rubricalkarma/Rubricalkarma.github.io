@@ -106,13 +106,6 @@ button:active{
 	text-align: center;
 	width: 100%;
 }
-.navBar{
-	background-color: darkblue;
-	height: 50px;
-	border-radius: 10px;
-	padding:0;
-	margin-bottom: 20px;
-}
 
 .characterIcon img{
 	display: block;

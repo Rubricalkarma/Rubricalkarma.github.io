@@ -8,6 +8,9 @@ body{
 	color: white;
 	text-transform: uppercase;
 }
+#navLinks li:nth-child(2){
+	background-color: rgba(64,64,64,.9);
+}
 
 }
 #raid{

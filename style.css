@@ -9,3 +9,6 @@ body{
 	color: white;
 	text-transform: uppercase;
 }
+#navLinks li:nth-child(1){
+	background-color: rgba(64,64,64,.9);
+}

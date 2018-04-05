@@ -1,8 +1,11 @@
 body{
-	background-color: #395e9a;
-	font-family: 'Roboto', comic sans ms;
-	text-transform: uppercase;
-	color: white;
+	padding: 0;
+	margin: 0;
+	font-family: 'Lato', comic sans ms;
+	font-weight: bold;
+	background-image: url("background.png");
+	background-size: cover;
+	color:white;
 }
 .ui-autocomplete{
 	position: absolute;

@@ -5,30 +5,36 @@ body{
 	font-weight: bold;
 	background-image: url("background.png");
 	background-size: cover;
-	color:white;
+	color: white;
+}
+#removeRecentCharacters{
+	margin-top: 20px;
+	display: block;
+	min-width: 200px;
+	width: 300px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
 }
 .ui-autocomplete{
 	position: absolute;
-	background-color: lightblue;
-	border: 1px solid darkblue;
-	color: black;
+	background-color: rgba(64,64,64,.8);
+	//border: 1px solid white;
 	list-style: none;
-	margin: auto;
+	margin: 0;
+	padding: 0;
 	padding-left: 10px;
 	padding-top: 3px;
-
-
 	max-height: 200px; 
 	overflow-y: auto; 
 	overflow-x: hidden;
 }
 .ui-state-active{
-	padding-left: 0px;
-	margin: 0;
-	position: relative;
-	background: white;
+	margin: 6px;
+	padding: 6px 10px;
+	background: rgb(30,30,30,.5);
+	display: inline-block;
 }
-
 .ui-helper-hidden-accessible {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -40,10 +46,10 @@ body{
 	width: 1px;
 }
 .searchBar{
+	margin-top: 60px;
 	height:75px;
-	//border-radius: 20px;
 	padding: 5px 0px;
-	background-color: lightblue;
+	background-color: rgba(64,64,64,.5);
 
 }
 .inputBoxes{
@@ -54,12 +60,10 @@ body{
 	background-color: #395e9a;
 	font-family: 'Roboto', comic sans ms;
 	text-transform: uppercase;
-	color: white;
 }
 input{
-	background-color: lightblue;
-	border: 2px solid darkblue;
-	color: black;
+	background-color: rgba(64,64,64,.5);
+	border: 2px solid white;
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
@@ -67,12 +71,12 @@ input{
 	font-size: 16px;
 	font-family: 'Roboto', comic sans ms;
 	text-transform: uppercase;
+	color: white;
 }
 
 select{
-	background-color: lightblue;
-	border: 2px solid darkblue;
-	color: black;
+	background-color: rgba(64,64,64,.5);
+	border: 2px solid white;
 	padding: 14px 32px;
 	text-align: center;
 	text-decoration: none;
@@ -80,12 +84,12 @@ select{
 	font-size: 16px;
 	font-family: 'Roboto', comic sans ms;
 	text-transform: uppercase;
+	color: white;
 }
 
 button {
-	background-color: lightblue;
-	border: 2px solid darkblue;
-	color: black;
+	background-color: rgba(64,64,64,.5);
+	border: 2px solid white;
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
@@ -93,9 +97,10 @@ button {
 	font-size: 16px;
 	font-family: 'Roboto', comic sans ms;
 	text-transform: uppercase;
+	color: white;
 }
 button:active{
-	background-color: darkblue;
+	background-color: black;
 }
 .info{
 	text-align: center;

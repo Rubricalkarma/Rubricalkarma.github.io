@@ -4,10 +4,11 @@ body{
 	font-family: 'Roboto', comic sans ms;
 	font-weight: bold;
 	background-image: url("background.png");
-	background-size: cover;
+	background-size: 100%;
+	background-repeat: repeat-y;
 	color: white;
 	text-transform: uppercase;
-	-webkit-animation:fadeIn 3s ease;
+	-webkit-animation:fadeIn 1s ease;
 }
 @-webkit-keyframes fadeIn{
 	0%{opacity:0;}

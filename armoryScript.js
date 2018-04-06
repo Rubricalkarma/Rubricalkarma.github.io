@@ -129,8 +129,8 @@ function getRealms(){
 		console.log("helloss");
 		var raidIndex = 0;
 		var bossIndex=0;
-		var raidName = document.getElementById("raidSelect").value;
-		var bossName = document.getElementById("bossSelect").value;
+		//var raidName = document.getElementById("raidSelect").value;
+		//var bossName = document.getElementById("bossSelect").value;
 
 	/*
 	for(var j=0;j<characterProgressionInfoObject.progression.raids.length;j++){

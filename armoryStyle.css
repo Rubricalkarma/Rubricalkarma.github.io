@@ -3,22 +3,35 @@ body{
 	margin: 0;
 	font-family: 'Roboto', comic sans ms;
 	font-weight: bold;
-	background-image: url("background3.jpg");
+	background-image: url("bgs/background3.jpg");
 	background-size: 100%;
 	background-repeat: repeat-y;
 	color: white;
 	text-transform: uppercase;
 	-webkit-animation:fadeIn 1s ease;
+
 }
 @-webkit-keyframes fadeIn{
 	0%{opacity:0;}
 	100%{opacity:1;}
 }
+
+#bgLayer{
+	background-color: rgba(0,0,0,.9);
+	position: absolute;
+	height: 100vh;
+	width: 60%;
+	margin-left: 20%;
+	margin-top: 85px;
+	z-index: -1;
+}
+
 #navLinks li:nth-child(2){
 	background-color: rgba(64,64,64,.9);
 }
 
 }
+/*
 #raid{
 	margin-top: 20px;
 	min-width: 200px;
@@ -34,6 +47,7 @@ body{
 	margin-right: auto;
 
 }
+*/
 .ui-autocomplete{
 	position: absolute;
 	background-color: rgba(64,64,64,.8);

@@ -12,12 +12,16 @@
 </head>
 <body>
 
+	<div id="bgLayer">
+	</div>
+
 	<div id="navBarHolder"></div>
 	<script>
 		$(function(){
 			$("#navBarHolder").load("navBar.html");
 		});
 	</script>
+
 
 	<div class="searchBar">
 		<div class="inputBoxes">
@@ -35,32 +39,33 @@
 	</div>
 -->
 
-	<div class="info">
-		<p>Character</p>
-		<p id="name"></p>
+<div class="info">
+	<p>Character</p>
+	<p id="name"></p>
 
-		<p>Character Info</p>
-		<p id="characterInfo"></p>
+	<p>Character Info</p>
+	<p id="characterInfo"></p>
 
-		<p>Character Item Level</p>
-		<p id="itemLevel"></p>
+	<p>Character Item Level</p>
+	<p id="itemLevel"></p>
 
-		<p id="kills"></p>
-		<p id="raidKills"></p>
-	</div>
+	<p id="kills"></p>
+	<p id="raidKills"></p>
+</div>
 
-	<div class="characterIcon">
-		<img id="icon" src="https://vignette.wikia.nocookie.net/uncyclopedia/images/0/01/DramaticQuestionMark.png/revision/latest?cb=20060419021703"/>
-	</div>
+<div class="characterIcon">
+	<img id="icon" src="https://vignette.wikia.nocookie.net/uncyclopedia/images/0/01/DramaticQuestionMark.png/revision/latest?cb=20060419021703"/>
+</div>
 
-	<script>
 
-		getRealms();
-		getRaids();
-		addRaids();
-		getBosses();
+<script>
 
-	</script>
+	getRealms();
+	getRaids();
+	addRaids();
+	getBosses();
+
+</script>
 
 </body>
 </html>

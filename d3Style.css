@@ -14,3 +14,6 @@ body{
 	0%{opacity:0;}
 	100%{opacity:1;}
 }
+#navLinks li:nth-child(3){
+	background-color: rgba(64,64,64,.9);
+}

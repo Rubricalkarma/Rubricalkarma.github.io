@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Armory</title>
+	<link rel="icon" href="icons/tbmlogo.png">
 	<link href="./armoryStyle.css" type="text/css" rel="stylesheet"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -29,7 +30,6 @@
 			<input id="characterSearch" type="text" placeholder="Character" spellcheck="false">
 			<button id="removeRecentCharacters" onclick="removeRecentCharacters();"> remove recent searches </button>
 			<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
-			<button onclick="getMasterList();"> Get Master List </button>
 		</div>
 	</div>
 
@@ -41,13 +41,13 @@
 -->
 
 <div id="info">
-	<p>Character</p>
+
 	<p id="name"></p>
 
-	<p>Character Info</p>
+	<!-- <p>Character Info</p> -->
 	<p id="characterInfo"></p>
 
-	<p>Character Item Level</p>
+	<!-- <p>Character Item Level</p> -->
 	<p id="itemLevel"></p>
 
 	<div id="raids"></div>
@@ -62,12 +62,8 @@
 
 
 <script>
-
 	getRealms();
 	getRaids();
-	addRaids();
-	getBosses();
-
 </script>
 
 </body>

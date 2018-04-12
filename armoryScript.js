@@ -74,9 +74,12 @@ function getProgressionInfo(){
 	var character = document.getElementById("characterSearch").value;
 	var apiCharProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
 	var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+
+	//Adds character to recently searched
 	if(!recentCharacters.includes(character)){
 		recentCharacters.push(character);
 	}
+
 	localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
 	var itemInfoObject;
 
@@ -95,7 +98,7 @@ function getProgressionInfo(){
 	var profileImage = itemInfoObject.thumbnail.replace("avatar.jpg", "profilemain.jpg");
 
 	document.getElementById("itemLevel").style = "color: "+color;
-	document.getElementById("itemLevel").innerHTML = itemLevel;
+	document.getElementById("itemLevel").innerHTML = "Item Level: "+itemLevel;
 	document.getElementById("icon").src = "http://render-us.worldofwarcraft.com/character/"+profileImage;
 
 	$.ajax({
@@ -118,6 +121,7 @@ function getProgressionInfo(){
 	document.getElementById("characterInfo").innerHTML = "level "+characterProgressionInfoObject.level+" "+getRace(characterProgressionInfoObject.race)+" "+getClass(characterProgressionInfoObject.class);
 
 	var killFeed="";
+	$("#raids").html("");
 	for(var i = 0;i<characterProgressionInfoObject.progression.raids.length;i++){
 
 		var raidName = characterProgressionInfoObject.progression.raids[i].name
@@ -137,6 +141,9 @@ function getProgressionInfo(){
 		raidName = raidName.replace(/\s/g, '');
 		raidName = raidName.replace(/'/g, '');
 		raidName = raidName.replace(",", '');
+		raidName +="Normal";
+
+
 		var numberOfBosses = characterProgressionInfoObject.progression.raids[i].bosses.length;
 		var numberOfBossesKilled=0;
 
@@ -149,8 +156,6 @@ function getProgressionInfo(){
 		
 		var bossPercentage = numberOfBossesKilled/numberOfBosses;
 
-		//console.log("Bosses in "+raidName+" killed: "+numberOfBossesKilled+"/"+numberOfBosses+"("+bossPercentage+"%)");
-
 				//Creates div with raids name
 
 				$("#raids").append("<div id="+raidName+"><p>"+characterProgressionInfoObject.progression.raids[i].name+"</p></div>");
@@ -159,23 +164,25 @@ function getProgressionInfo(){
 					/*"border":"2px solid blue",*/
 					"display":"inline-block",
 					"padding":"5px",
-					"min-width":"400px"
+					"min-width":"400px",
 				});
 
-				//$("#"+raidName).html("");
 				$("#"+raidName).append("<div id="+raidName+"BAR>&nbsp</div>");
 				$("#"+raidName+"BAR").css({
 					"width":"200px",
 					"background-color":"brown",
 					"color":"blue",
 					"position":"relative",
+					/*"text-align":"center",*/
 					"border": "1px solid white"
 					});
-				
-				//$("#"+raidName+"BAR").html("");
-				$("#"+raidName+"BAR").append("<div id="+raidName+"PROGRESS><span>&nbsp</span></div>");
+				//Adds Progress Bar to Raid Bar
+				$("#"+raidName+"BAR").append("<div id="+raidName+"PROGRESS><span>&nbsp<span></div>");
+
+				//Stores info on each boss kill
 				$("#"+raidName+"BAR").data("numberOfBossesKilled",numberOfBossesKilled);
 				$("#"+raidName+"BAR").data("numberOfBosses",numberOfBosses);
+
 				$("#"+raidName+"PROGRESS").css({
 					"width":(bossPercentage*200)+"px",
 					"color":"white",
@@ -186,12 +193,22 @@ function getProgressionInfo(){
 					"padding":"0px"
 				});
 
+
+
 				$("#"+raidName+"BAR").hover(
 					function(){
-						console.log("on")
+						console.log(this.id)
+						var divProgress = this.id;
 						let nobk = $(this).data("numberOfBossesKilled");
 						let nob = $(this).data("numberOfBosses");
+						/*
+						divProgress = divProgress.replace("BAR","PROGRESS");
+						move(divProgress,nobk/nob);
+						*/
 						$(this).find("span").html(nobk+"/"+nob);
+						console.log($("#"+this.id).width());
+						var barWidth = $("#"+this.id).width();
+						$(this).find("span").css({"padding-left": (barWidth/2)-15+"px"});
 					},
 					function(){
 						console.log("off")
@@ -218,6 +235,20 @@ function getProgressionInfo(){
 	}
 	//document.getElementById("kills").innerHTML = killFeed;
 	document.getElementById("bgLayer").style.height= document.getElementById('info').clientHeight+30+"px";
+}
+
+function move(divName,maxWidth) {
+    var elem = document.getElementById(divName); 
+    var width = 1;
+    var id = setInterval(frame, 20);
+    function frame() {
+        if (width >= maxWidth*100) {
+            clearInterval(id);
+        } else {
+            width++; 
+            elem.style.width = width + '%'; 
+        }
+    }
 }
 
 function getExpacColor(number){
@@ -352,7 +383,7 @@ function getRaids(){
 }
 
 }
-
+/*
 function addRaids(){
 
 	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
@@ -362,7 +393,8 @@ function addRaids(){
 		x.options.add(c, i);
 	}
 }
-
+*/
+/*
 function getBosses(){
 
 	$("#bossSelect").empty();
@@ -387,6 +419,7 @@ function getBosses(){
 
 
 }
+*/
 
 
 function setAutoComplete(realmList, recentCharacters){

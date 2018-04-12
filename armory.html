@@ -29,6 +29,7 @@
 			<input id="characterSearch" type="text" placeholder="Character" spellcheck="false">
 			<button id="removeRecentCharacters" onclick="removeRecentCharacters();"> remove recent searches </button>
 			<button id="getInfo" onclick="getProgressionInfo();"> Get Info </button>
+			<button onclick="getMasterList();"> Get Master List </button>
 		</div>
 	</div>
 
@@ -39,7 +40,7 @@
 	</div>
 -->
 
-<div class="info">
+<div id="info">
 	<p>Character</p>
 	<p id="name"></p>
 
@@ -48,6 +49,8 @@
 
 	<p>Character Item Level</p>
 	<p id="itemLevel"></p>
+
+	<div id="raids"></div>
 
 	<p id="kills"></p>
 	<p id="raidKills"></p>

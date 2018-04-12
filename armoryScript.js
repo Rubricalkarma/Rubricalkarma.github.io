@@ -44,110 +44,73 @@ function getRealms(){
 		console.log("Realm info loaded from Local Storage");
 	}
 	//adds all realms to array
+	realmList = [];
 	for(let i=0;i<realmInfoObject.realms.length;i++){
 		realmList.push(realmInfoObject.realms[i].name);
 	}
+	setAutoComplete(realmList,recentCharacters);
+}
 
-		//sets autocomplete for serverSearch with realmList array
-		$( "#serverSearch" ).autocomplete({
-			minLength: 0,
-			source: realmList,
-			position: {my: "left+0 top+0",},
-		})
-		.focus(function() {
-			$(this).autocomplete('search', $(this).val())
-		});
-
-		//sets autocomplete for serverSearch with realmList array
-		$( "#characterSearch" ).autocomplete({
-			minLength: 0,
-			source: recentCharacters,
-		})
-		.focus(function() {
-			$(this).autocomplete('search', $(this).val())
-		});
+function getMasterList(){
+	var masterListAPI = "https://us.api.battle.net/wow/zone/?locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8";
+	raids;
+	var masterList = null;
+	$.ajax({
+		url: masterListAPI,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			masterList = json;
+		}
+	});
+	return masterList;
+}
 
 
+
+function getProgressionInfo(){
+	console.log('progression info ran');
+	var server = document.getElementById("serverSearch").value;
+	var character = document.getElementById("characterSearch").value;
+	var apiCharProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+	var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+	if(!recentCharacters.includes(character)){
+		recentCharacters.push(character);
 	}
+	localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
+	var itemInfoObject;
 
-
-
-	function getProgressionInfo(){
-
-		var server = document.getElementById("serverSearch").value;
-		var character = document.getElementById("characterSearch").value;
-		var apiCharProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
-		var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
-		if(!recentCharacters.includes(character)){
-			recentCharacters.push(character);
+	$.ajax({
+		url: apiItems,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			itemInfoObject = json;
 		}
-		localStorage.setItem('recentCharacters', JSON.stringify(recentCharacters));
-		var itemInfoObject;
+	});
 
-		$.ajax({
-			url: apiItems,
-			async: false,
-			dataType: 'json',
-			success: function (json) {
-				itemInfoObject = json;
-			}
-		});
+	var itemLevel = itemInfoObject.items.averageItemLevel;
+	var color = getItemLevelColor(itemLevel);
 
-		var color = "gray";
-		var itemLevel = itemInfoObject.items.averageItemLevel;
+	var profileImage = itemInfoObject.thumbnail.replace("avatar.jpg", "profilemain.jpg");
 
-		if(itemLevel>960){
-			color="orange";
+	document.getElementById("itemLevel").style = "color: "+color;
+	document.getElementById("itemLevel").innerHTML = itemLevel;
+	document.getElementById("icon").src = "http://render-us.worldofwarcraft.com/character/"+profileImage;
+
+	$.ajax({
+		url: apiCharProgression,
+		async: false,
+		dataType: 'json',
+		success: function (json) {
+			characterProgressionInfoObject = json;
 		}
-		else if(itemLevel>940){
-			color="purple";
-		}
-		else if(itemLevel>920){
-			color="blue";
-		}
-		else if(itemLevel>900){
-			color="green";
-		}
-		else if(itemLevel>880){
-			color="white";
-		}
-		var profileImage = itemInfoObject.thumbnail.replace("avatar.jpg", "profilemain.jpg");
+	});
 
-		document.getElementById("itemLevel").style = "color: "+color;
-		document.getElementById("itemLevel").innerHTML = itemLevel;
-		document.getElementById("icon").src = "http://render-us.worldofwarcraft.com/character/"+profileImage;
+	var masterList = getMasterList();
 
-		$.ajax({
-			url: apiCharProgression,
-			async: false,
-			dataType: 'json',
-			success: function (json) {
-				characterProgressionInfoObject = json;
-			}
-		});
-
-		console.log("helloss");
-		var raidIndex = 0;
-		var bossIndex=0;
-		//var raidName = document.getElementById("raidSelect").value;
-		//var bossName = document.getElementById("bossSelect").value;
-
-	/*
-	for(var j=0;j<characterProgressionInfoObject.progression.raids.length;j++){
-		if(characterProgressionInfoObject.progression.raids[j].name === raidName){
-			raidIndex=j;
-			break;
-		}
-	}
-
-	for(var k=0;k<characterProgressionInfoObject.progression.raids[raidIndex].bosses.length;k++){
-		if(characterProgressionInfoObject.progression.raids[raidIndex].bosses[k].name===bossName){
-			bossIndex=k;
-			break;
-		}
-	}
-	*/
-
+	var raidIndex = 0;
+	var bossIndex=0;
 
 	document.getElementById("name").style.color=getClassColor(characterProgressionInfoObject.class);
 	document.getElementById("name").innerHTML = characterProgressionInfoObject.name+" - "+characterProgressionInfoObject.realm;
@@ -156,10 +119,92 @@ function getRealms(){
 
 	var killFeed="";
 	for(var i = 0;i<characterProgressionInfoObject.progression.raids.length;i++){
-		console.log("Raid: "+ characterProgressionInfoObject.progression.raids[i].name);
+
+		var raidName = characterProgressionInfoObject.progression.raids[i].name
+
+		//Gets expac of the raid
+		var expac;
+		for(let i=0;i<masterList.zones.length;i++){
+			if(masterList.zones[i].isRaid===true){
+				if(masterList.zones[i].name===raidName){
+					expac = masterList.zones[i].expansionId;
+					//console.log(raidName+" : "+expac);
+				}
+			}
+		}
+
+		//Removes spaces and apostrophes
+		raidName = raidName.replace(/\s/g, '');
+		raidName = raidName.replace(/'/g, '');
+		raidName = raidName.replace(",", '');
+		var numberOfBosses = characterProgressionInfoObject.progression.raids[i].bosses.length;
+		var numberOfBossesKilled=0;
+
+
+		for(let k = 0;k<numberOfBosses;k++){
+			if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills>0){
+				numberOfBossesKilled++;
+			}
+		}
+		
+		var bossPercentage = numberOfBossesKilled/numberOfBosses;
+
+		//console.log("Bosses in "+raidName+" killed: "+numberOfBossesKilled+"/"+numberOfBosses+"("+bossPercentage+"%)");
+
+				//Creates div with raids name
+
+				$("#raids").append("<div id="+raidName+"><p>"+characterProgressionInfoObject.progression.raids[i].name+"</p></div>");
+				$("#"+raidName).css({
+					"position":"relative",
+					/*"border":"2px solid blue",*/
+					"display":"inline-block",
+					"padding":"5px",
+					"min-width":"400px"
+				});
+
+				//$("#"+raidName).html("");
+				$("#"+raidName).append("<div id="+raidName+"BAR>&nbsp</div>");
+				$("#"+raidName+"BAR").css({
+					"width":"200px",
+					"background-color":"brown",
+					"color":"blue",
+					"position":"relative",
+					"border": "1px solid white"
+					});
+				
+				//$("#"+raidName+"BAR").html("");
+				$("#"+raidName+"BAR").append("<div id="+raidName+"PROGRESS><span>&nbsp</span></div>");
+				$("#"+raidName+"BAR").data("numberOfBossesKilled",numberOfBossesKilled);
+				$("#"+raidName+"BAR").data("numberOfBosses",numberOfBosses);
+				$("#"+raidName+"PROGRESS").css({
+					"width":(bossPercentage*200)+"px",
+					"color":"white",
+					"background-color":"green",
+					"position":"absolute",
+					"top":"0",
+					"left":"0",
+					"padding":"0px"
+				});
+
+				$("#"+raidName+"BAR").hover(
+					function(){
+						console.log("on")
+						let nobk = $(this).data("numberOfBossesKilled");
+						let nob = $(this).data("numberOfBosses");
+						$(this).find("span").html(nobk+"/"+nob);
+					},
+					function(){
+						console.log("off")
+						$(this).find("span").html("&nbsp");
+				});
+				
+
+		//Sets the color of each raid div by expac
+		//console.log(raidName+" Expac: "+expac+" "+getExpacColor(expac));
+		$("#"+raidName).css("color", getExpacColor(expac));
+		/*
 		raidIndex=i;
 		for(var j = 0;j<characterProgressionInfoObject.progression.raids[raidIndex].bosses.length;j++){
-			console.log("      "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[j].name);
 			bossIndex=j;
 
 			killFeed = killFeed.concat("<div>"+characterProgressionInfoObject.progression.raids[raidIndex].name+" - "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].name+"</div><br/>"+
@@ -168,11 +213,51 @@ function getRealms(){
 				"<div style='color: yellow'>Heroic: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].heroicKills+"</div><br/>"+
 				"<div style='color: red'>Mythic: "+characterProgressionInfoObject.progression.raids[raidIndex].bosses[bossIndex].mythicKills+"</div><br/>");
 		}	
+		*/
 
 	}
-	console.log(killFeed);
-	document.getElementById("kills").innerHTML = killFeed;
-}	
+	//document.getElementById("kills").innerHTML = killFeed;
+	document.getElementById("bgLayer").style.height= document.getElementById('info').clientHeight+30+"px";
+}
+
+function getExpacColor(number){
+	switch(number){
+		case 0: return "gold";
+		break;
+		case 1: return "lightgreen";
+		break;
+		case 2: return "blue";
+		break;
+		case 3: return "orange";
+		break;
+		case 4: return "darkred";
+		break;
+		case 5: return "brown";
+		break;
+		case 6: return "green";
+		break;
+	}
+}
+
+function getItemLevelColor(itemLevel){
+	if(itemLevel>960){
+		return "orange";
+	}
+	else if(itemLevel>940){
+		return "purple";
+	}
+	else if(itemLevel>920){
+		return "blue";
+	}
+	else if(itemLevel>900){
+		return "green";
+	}
+	else if(itemLevel>880){
+		return "white";
+	}else{
+		return "gray";
+	}
+}
 
 function getClassColor(number){
 	switch(number){
@@ -202,8 +287,6 @@ function getClassColor(number){
 		break;
 	}
 }
-
-
 
 
 function getClass(number){
@@ -282,7 +365,6 @@ function addRaids(){
 
 function getBosses(){
 
-
 	$("#bossSelect").empty();
 
 	var selected = document.getElementById("raidSelect").value;
@@ -305,3 +387,25 @@ function getBosses(){
 
 
 }
+
+
+function setAutoComplete(realmList, recentCharacters){
+				//sets autocomplete for serverSearch with realmList array
+				$( "#serverSearch" ).autocomplete({
+					minLength: 0,
+					source: realmList,
+					position: {my: "left+0 top+0",},
+				})
+				.focus(function() {
+					$(this).autocomplete('search', $(this).val())
+				});
+
+		//sets autocomplete for serverSearch with realmList array
+		$( "#characterSearch" ).autocomplete({
+			minLength: 0,
+			source: recentCharacters,
+		})
+		.focus(function() {
+			$(this).autocomplete('search', $(this).val())
+		});
+	}

@@ -129,10 +129,13 @@ function getProgressionInfo(){
 
 		//Gets expac of the raid
 		var expac;
+		var urlSlug;
 		for(let h=0;h<masterList.zones.length;h++){
+			//console.log(masterList.zones[h].urlSlug);
 			if(masterList.zones[h].isRaid===true){
 				if(masterList.zones[h].name===plainRaidName){
 					expac = masterList.zones[h].expansionId;
+					urlSlug = masterList.zones[h].urlSlug;
 				}
 			}
 		}
@@ -270,30 +273,40 @@ function getProgressionInfo(){
 
 				if(raidTypeExists){
 					while(!titleMade){
+						imageURL = "https://render-us.worldofwarcraft.com/zones/"+urlSlug+"-small.jpg"
 						//$("#raids").append("<div id="+plainRaidName+"></div>");
 						$("#expacRaids"+expac).append("<div id="+plainRaidName+"></div>");
-						$("#"+plainRaidName).append("<p id="+raidName+"Title"+">"+characterProgressionInfoObject.progression.raids[i].name+"</p>")
-						titleMade=true;
+						$("#"+plainRaidName).append("<p id="+raidName+"Title"+">"+characterProgressionInfoObject.progression.raids[i].name+"</p><img id="+plainRaidName+"Img src="+imageURL+">");
+						titleMade=true;	
 					}
+					$("#"+plainRaidName+"Img").css({
+						"width":"200px",
+						"height":"100px",
+						"border":"1px solid white"
+					});
 					$("#"+plainRaidName).append("<div id="+raidName+"></div>");
 					$("#"+plainRaidName).css({
 						"display":"inline-block",
-						"margin":"20px",
-						/*"border":"1px solid blue",*/
-						"width":"300px",
-						"padding":"0px",
+						"vertical-align":"top",
+						"background":"rgba(57,38,95,.9)",
+						"margin":"0px",
+						"margin-bottom":"20px",
+						"margin-right":"20px",
+						"border":"1px solid	white",
+						"width":"220px",
+						"height":"330px",
+						"padding":"15px",
 					});
 					$("#"+raidName+"Title").css({
 						"color": getExpacColor(expac),
-						"margin-bottom":"10px"
+						"margin":"0px",
+						"margin-bottom":"10px",
+						"padding":"0px",
 					});
 					$("#"+raidName).css({
 						"position":"relative",
 						"display":"inline-block",
-						"margin-top":"0px",
-						/*"border":"2px solid blue",*/
-						/*"padding":"5px",*/
-						/*"margin-top":"5px",*/
+						"margin":"0px",
 						"width":"200px",
 					});
 				//Adds bar to raid
@@ -305,7 +318,7 @@ function getProgressionInfo(){
 				$("#"+raidName+"BAR").css({
 					"width":"200px",
 					"margin-top":"2px",
-					"background-color":"brown",
+					"background":"linear-gradient(brown,rgb(101,33,33))",
 					"color":"blue",
 					"position":"relative",
 					"border": "1px solid white"
@@ -320,7 +333,7 @@ function getProgressionInfo(){
 				$("#"+raidName+"PROGRESS").css({
 					"width":(bossPercentage*200)+"px",
 					"color":"white",
-					"background-color":"green",
+					"background":"linear-gradient(green,darkgreen)",
 					"position":"absolute",
 					"top":"0",
 					"left":"0",
@@ -355,6 +368,9 @@ function getProgressionInfo(){
 	}
 	//document.getElementById("kills").innerHTML = killFeed;
 	document.getElementById("bgLayer").style.height= document.getElementById('info').clientHeight+30+"px";
+}
+function convertDate(epoch){
+	return new Date(epoch);
 }
 
 
@@ -485,8 +501,6 @@ function getClass(number){
 }
 
 function getRace(number){
-
-
 	var raceObject = null;
 
 	$.ajax({
@@ -525,45 +539,7 @@ function getRaids(){
 	//If the info is not null, then continues properly
 	console.log("Raid Boss Info Read From Cache");
 }
-
 }
-/*
-function addRaids(){
-
-	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
-		var x = document.getElementById("raidSelect");
-		var c = document.createElement("option");
-		c.text = raidInfoObject.progression.raids[i].name;
-		x.options.add(c, i);
-	}
-}
-*/
-/*
-function getBosses(){
-
-	$("#bossSelect").empty();
-
-	var selected = document.getElementById("raidSelect").value;
-
-	var raidIndex;
-
-	for(var i=0;i<raidInfoObject.progression.raids.length;i++){
-		if(raidInfoObject.progression.raids[i].name===selected){
-			raidIndex=i;
-			break;
-		}
-	}
-
-	for(var j=0;j<raidInfoObject.progression.raids[raidIndex].bosses.length;j++){
-		var x = document.getElementById("bossSelect");
-		var c = document.createElement("option");
-		c.text = raidInfoObject.progression.raids[raidIndex].bosses[j].name;
-		x.options.add(c, i);
-	}
-
-
-}
-*/
 
 
 function setAutoComplete(realmList, recentCharacters){

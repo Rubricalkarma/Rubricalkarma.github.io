@@ -16,12 +16,12 @@ body{
 }
 
 #bgLayer{
-	background-color: rgba(64,64,64,.9);
+	background: linear-gradient(rgba(64,64,64,.9),rgba(30,30,30,.9));
 	position: absolute;
 	height: 100vh;
 	width: 80%;
 	margin-left: 10%;
-	margin-top: 400px;
+	margin-top: 250px;
 	z-index: -1;
 	border: 4px solid white;
 }

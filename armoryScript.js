@@ -209,60 +209,72 @@ function getProgressionInfo(){
 				console.log(raidName);
 
 				var raidTypeExists = true;
-				var numberOfBosses = characterProgressionInfoObject.progression.raids[i].bosses.length;
+				var numberOfExpectedBosses = characterProgressionInfoObject.progression.raids[i].bosses.length;
+				var numberOfBosses = 0;
 				var numberOfBossesKilled=0;
 
 				if(raidType==="lfr"){
-					for(let k = 0;k<numberOfBosses;k++){
-						if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills>0 || characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills === undefined){
-							if(characterProgressionInfoObject.progression.raids[i].bosses[0].lfrKills === undefined){
-								//console.log(raidType+": "+characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills);
-								raidTypeExists=false;
-								break;
-							}else{
-								numberOfBossesKilled++;
+					for(let k = 0;k<numberOfExpectedBosses;k++){
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills === undefined){
+							if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills !== undefined){
+								//raidTypeExists=false;
+								//break;
+								numberOfBosses++;
 							}
+						}
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills>0){
+							numberOfBossesKilled++;
 						}
 					}
 				}
+
 				else if(raidType==="normal"){
-					for(let k = 0;k<numberOfBosses;k++){
-						if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills>0 || characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills === undefined){
-							if(characterProgressionInfoObject.progression.raids[i].bosses[0].normalKills === undefined){
-								//console.log(raidType+" does not exist");
-								raidTypeExists=false;
-								break;
-							}else{
-								numberOfBossesKilled++;
+					for(let k = 0;k<numberOfExpectedBosses;k++){
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills === undefined){
+							if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills !== undefined){
+								//raidTypeExists=false;
+								//break;
+								numberOfBosses++;
 							}
+						}
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills>0){
+							numberOfBossesKilled++;
 						}
 					}
 				}
+
 				else if(raidType==="heroic"){
-					for(let k = 0;k<numberOfBosses;k++){
-						if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills>0 || characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills === undefined){
-							if(characterProgressionInfoObject.progression.raids[i].bosses[0].heroicKills === undefined){
-								//console.log(raidType+" does not exist");
-								raidTypeExists=false;
-								break;
-							}else{
-								numberOfBossesKilled++;
+					for(let k = 0;k<numberOfExpectedBosses;k++){
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills === undefined){
+							if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills !== undefined){
+								//raidTypeExists=false;
+								//break;
+								numberOfBosses++;
 							}
+						}
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills>0){
+							numberOfBossesKilled++;
 						}
 					}
 				}
 				else if(raidType==="mythic"){
-					for(let k = 0;k<numberOfBosses;k++){
-						if(characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills>0 || characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills === undefined){
-							if(characterProgressionInfoObject.progression.raids[i].bosses[0].mythicKills === undefined){
-								//console.log(raidType+" does not exist");
-								raidTypeExists=false;
-								break;
-							}else{
-								numberOfBossesKilled++;
+					for(let k = 0;k<numberOfExpectedBosses;k++){
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills === undefined){
+							if(characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills !== undefined){
+								//raidTypeExists=false;
+								//break;
+								numberOfBosses++;
 							}
 						}
+						if(characterProgressionInfoObject.progression.raids[i].bosses[k].mythicKills>0){
+							numberOfBossesKilled++;
+						}
 					}
+				}
+
+
+				if(numberOfBosses===0){
+					raidTypeExists=false;
 				}
 
 				var bossPercentage = numberOfBossesKilled/numberOfBosses;
@@ -288,20 +300,21 @@ function getProgressionInfo(){
 					$("#"+plainRaidName).css({
 						"display":"inline-block",
 						"vertical-align":"top",
-						"background":"rgba(57,38,95,.9)",
+						"background":"linear-gradient(rgba(57,38,95,.9),rgba(10,10,10,.9))",
 						"margin":"0px",
 						"margin-bottom":"20px",
 						"margin-right":"20px",
 						"border":"1px solid	white",
 						"width":"220px",
 						"height":"330px",
-						"padding":"15px",
+						"padding":"25px",
 					});
 					$("#"+raidName+"Title").css({
 						"color": getExpacColor(expac),
 						"margin":"0px",
 						"margin-bottom":"10px",
 						"padding":"0px",
+						"height":"40px"
 					});
 					$("#"+raidName).css({
 						"position":"relative",

@@ -25,6 +25,13 @@ body{
 	border: 10px solid orange;
 }
 
+#introText{
+	  color: white;
+	  background-color: rgba(64,64,64,.3);
+
+
+}
+
 #introWelcome{
 	font-size: 200px;
 	margin: 0px;

@@ -67,13 +67,15 @@ function getMasterList(){
 }
 
 
-
 function getProgressionInfo(){
 	console.log('progression info ran');
 	var server = document.getElementById("serverSearch").value;
 	var character = document.getElementById("characterSearch").value;
 	var apiCharProgression = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=progression&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
 	var apiItems = 'https://us.api.battle.net/wow/character/'+server+'/'+character+'?fields=items&locale=en_US&apikey=dfp2dz9s5mjnpsxyk3zatz9zc8mpmmq8';
+
+	//window.history.pushState("hello","Title","armory.html/"+server+"/"+character+"/")
+
 
 	//Adds character to recently searched
 	if(!recentCharacters.includes(character)){
@@ -178,8 +180,6 @@ function getProgressionInfo(){
 			});
 		}
 
-
-
 		for(let p=0;p<4;p++){
 			var raidName = characterProgressionInfoObject.progression.raids[i].name
 				//Removes spaces and apostrophes
@@ -206,7 +206,7 @@ function getProgressionInfo(){
 					raidType="mythic";
 					break;
 				}
-				console.log(raidName);
+				//console.log(raidName);
 
 				var raidTypeExists = true;
 				var numberOfExpectedBosses = characterProgressionInfoObject.progression.raids[i].bosses.length;
@@ -217,8 +217,6 @@ function getProgressionInfo(){
 					for(let k = 0;k<numberOfExpectedBosses;k++){
 						if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills === undefined){
 							if(characterProgressionInfoObject.progression.raids[i].bosses[k].lfrKills !== undefined){
-								//raidTypeExists=false;
-								//break;
 								numberOfBosses++;
 							}
 						}
@@ -232,8 +230,6 @@ function getProgressionInfo(){
 					for(let k = 0;k<numberOfExpectedBosses;k++){
 						if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills === undefined){
 							if(characterProgressionInfoObject.progression.raids[i].bosses[k].normalKills !== undefined){
-								//raidTypeExists=false;
-								//break;
 								numberOfBosses++;
 							}
 						}
@@ -247,8 +243,6 @@ function getProgressionInfo(){
 					for(let k = 0;k<numberOfExpectedBosses;k++){
 						if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills>-1 || characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills === undefined){
 							if(characterProgressionInfoObject.progression.raids[i].bosses[k].heroicKills !== undefined){
-								//raidTypeExists=false;
-								//break;
 								numberOfBosses++;
 							}
 						}
@@ -342,11 +336,19 @@ function getProgressionInfo(){
 				//Stores info on each boss kill
 				$("#"+raidName+"BAR").data("numberOfBossesKilled",numberOfBossesKilled);
 				$("#"+raidName+"BAR").data("numberOfBosses",numberOfBosses);
+				$("#"+raidName+"BAR").data("raidName",raidName);
+				var barColor="";
+
+				if(bossPercentage<.5){
+					barColor="linear-gradient(orange,darkorange)";
+				}else{
+					barColor="linear-gradient(green,darkgreen)"
+				}
 
 				$("#"+raidName+"PROGRESS").css({
 					"width":(bossPercentage*200)+"px",
 					"color":"white",
-					"background":"linear-gradient(green,darkgreen)",
+					"background": barColor,
 					"position":"absolute",
 					"top":"0",
 					"left":"0",
@@ -357,22 +359,32 @@ function getProgressionInfo(){
 				//Adds hover function to bar
 				$("#"+raidName+"BAR").hover(
 					function(){
-						console.log(this.id)
-						var divProgress = this.id;
+						let raidName = $(this).data("raidName");
 						let nobk = $(this).data("numberOfBossesKilled");
 						let nob = $(this).data("numberOfBosses");
-						/*
-						divProgress = divProgress.replace("BAR","PROGRESS");
-						move(divProgress,nobk/nob);
-						*/
 						$(this).find("span").html(nobk+"/"+nob);
-						console.log($("#"+this.id).width());
 						var barWidth = $("#"+this.id).width();
 						$(this).find("span").css({"padding-left": (barWidth/2)-15+"px"});
+
+						$("#"+raidName+"RaidType").find("span").css({
+							"color":"yellow"
+						})
+						$("#"+raidName+"BAR").css({
+							"border":"1px solid yellow"
+						})
+
 					},
 					function(){
 						console.log("off")
 						$(this).find("span").html("&nbsp");
+						let raidName = $(this).data("raidName");
+						$("#"+raidName+"RaidType").find("span").css({
+							"color":"white"
+						})
+							$("#"+raidName+"BAR").css({
+							"border":"1px solid white"
+						})
+
 					});
 				
 
@@ -380,7 +392,7 @@ function getProgressionInfo(){
 		}
 	}
 	//document.getElementById("kills").innerHTML = killFeed;
-	document.getElementById("bgLayer").style.height= document.getElementById('info').clientHeight+30+"px";
+	document.getElementById("bgLayer").style.height = document.getElementById('info').clientHeight+30+"px";
 }
 function convertDate(epoch){
 	return new Date(epoch);

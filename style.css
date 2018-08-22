@@ -29,8 +29,6 @@ body{
 	  color: white;
 	  margin-top: 40px;
 	  background-color: rgba(64,64,64,.3);
-
-
 }
 
 #introWelcome{
@@ -60,4 +58,20 @@ body{
 	opacity: 0;
 	-webkit-animation:fadeIn 2s ease forwards;
 	-webkit-animation-delay:2s;
+}
+
+button {
+	background-color: rgba(64,64,64,.5);
+	border: 2px solid white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	font-family: 'Roboto', comic sans ms;
+	text-transform: uppercase;
+	color: white;
+}
+button:active{
+	background-color: black;
 }

@@ -434,6 +434,8 @@ function getExpacColor(number){
 		break;
 		case 6: return "green";
 		break;
+		case 7: return "white";
+		break;
 	}
 }
 function getExpac(number){
@@ -451,6 +453,8 @@ function getExpac(number){
 		case 5: return "Warlords of Dreanor";
 		break;
 		case 6: return "Legion";
+		break;
+		case 7: return "Battle for Azeroth"
 		break;
 	}
 }

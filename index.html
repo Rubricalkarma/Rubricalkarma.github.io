@@ -1,49 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title> The Bread Men</title>
-	<link rel="icon" href="icons/tbmlogo.png">
-	<link href="./style.css" type="text/css" rel="stylesheet"/>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="./script.js"></script>
-</head>
-<body>
-
-	<script type="text/javascript">
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			window.location="mobileHome.html";
-		}
-	</script>
-
-	<div id="navBarHolder"></div>
-	<script>
-		$(function(){
-			$("#navBarHolder").load("navBar.html");
-		});
-	</script>
-
-
-	<div id="introText">
-		<h1 id="introWelcome">Welcome</h1>
-		<h1 id="introTo">To</h1>
-		<h1 id="introBFA">Battle For Azeroth</h1>
-	</div>
-
-	<button>JOIN</button>
-
-	<!--
-	<div id="twitch-embed"></div>
-	<script src="https://embed.twitch.tv/embed/v1.js"></script>
-	 <script type="text/javascript">
-      new Twitch.Embed("twitch-embed", {
-        width: 854,
-        height: 480,
-        channel: "monstercat"
-      });
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Baldorf Alpha</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/opengl.json", {onProgress: UnityProgress});
     </script>
--->
-
-</body>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">Baldorf Alpha</div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 {
 "companyName": "Mystic Rhoads",
-"productName": "Baldorf Alpha",
-"productVersion": "0.8",
+"productName": "Baldorf",
+"productVersion": "1",
 "dataUrl": "Web Build.data.unityweb",
 "wasmCodeUrl": "Web Build.wasm.code.unityweb",
 "wasmFrameworkUrl": "Web Build.wasm.framework.unityweb",

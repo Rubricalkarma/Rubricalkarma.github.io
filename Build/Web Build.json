@@ -1,0 +1,16 @@
+{
+"companyName": "Mystic Rhoads",
+"productName": "Baldorf Alpha",
+"productVersion": "0.8",
+"dataUrl": "Web Build.data.unityweb",
+"wasmCodeUrl": "Web Build.wasm.code.unityweb",
+"wasmFrameworkUrl": "Web Build.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Light",
+"backgroundColor": "#FFFFFF",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.2f1"
+}
